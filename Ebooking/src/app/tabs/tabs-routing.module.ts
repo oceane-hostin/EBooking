@@ -8,45 +8,45 @@ const routes: Routes = [
     component: TabsPage,
     children: [
       {
-        path: 'accueil',
+        path: 'home',
         children: [
           {
             path: '',
             loadChildren: () =>
-              import('../accueil/accueil.module').then(m => m.AccueilPageModule)
+              import('../home/home.module').then(m => m.HomePageModule)
           }
         ]
       },
       {
-        path: 'MonCompte',
+        path: 'account',
         children: [
           {
             path: '',
             loadChildren: () =>
-              import('../Moncompte/Moncompte.module').then(m => m.MonComptePageModule)
+              import('../account/account.module').then(m => m.AccountPageModule)
           }
         ]
       },
       {
-        path: 'MesFavoris',
+        path: 'favorite',
         children: [
           {
             path: '',
             loadChildren: () =>
-              import('../MesFavoris/MesFavoris.module').then(m => m.MesFavorisPageModule)
+              import('../favorite/favorite.module').then(m => m.FavoritePageModule)
           }
         ]
       },
       {
         path: '',
-        redirectTo: '/tabs/accueil',
+        redirectTo: '/tabs/home',
         pathMatch: 'full'
       }
     ]
   },
   {
     path: '',
-    redirectTo: '/tabs/accueil',
+    redirectTo: '/tabs/home',
     pathMatch: 'full'
   }
 ];
