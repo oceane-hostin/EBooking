@@ -1,5 +1,7 @@
 {
   "name": "Ebooking",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
