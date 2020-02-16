@@ -14,4 +14,27 @@
   </ion-header>
 
   <app-explore-container name="search page"></app-explore-container>
+
+  <form (ngSubmit)="searchForm()">
+    <ion-item>
+      <ion-label>Destination</ion-label>
+      <ion-input type="text" [(ngModel)]="form.destination" name="destination"></ion-input>
+    </ion-item>
+
+
+    <ion-item>
+      <ion-label>Rooms</ion-label>
+      <ion-input type="text" [(ngModel)]="form.rooms" name="rooms"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Adults</ion-label>
+      <ion-input type="text" [(ngModel)]="form.adults" name="adults"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Children</ion-label>
+      <ion-input type="text" [(ngModel)]="form.children" name="children"></ion-input>
+    </ion-item>
+  </form>
 </ion-content>

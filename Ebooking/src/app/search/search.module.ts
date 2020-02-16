@@ -17,3 +17,4 @@ import { ExploreContainerComponentModule } from '../explore-container/explore-co
   declarations: [SearchPage]
 })
 export class SearchPageModule { }
+
