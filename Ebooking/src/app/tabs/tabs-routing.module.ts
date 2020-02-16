@@ -48,6 +48,16 @@ const routes: Routes = [
         ]
       },
       {
+        path: 'discover',
+        children: [
+          {
+            path: '',
+            loadChildren: () =>
+              import('../discover/discover.module').then(m => m.DiscoverPageModule)
+          }
+        ]
+      },
+      {
         path: '',
         redirectTo: '/tabs/home',
         pathMatch: 'full'
