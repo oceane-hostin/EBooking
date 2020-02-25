@@ -8,4 +8,8 @@ ion-card {
 		height: 300px;
 		object-fit: cover;
 	}
+
+	ion-card-subtitle {
+		text-transform: uppercase;
+	}
 }
