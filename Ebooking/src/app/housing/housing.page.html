@@ -1,0 +1,68 @@
+<ion-header [translucent]="true">
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref="/tabs/discover"></ion-back-button>
+        </ion-buttons>
+    </ion-toolbar>
+    <ion-progress-bar *ngIf="!housing" type="indeterminate"></ion-progress-bar>
+</ion-header>
+
+
+<ion-content [fullscreen]="true" *ngIf="housing">
+    <ion-item-group *ngIf="housing.id; else housing_notfound">
+        <ion-img [src]="housing.images[0].url"></ion-img>
+        <h1>{{ housing.name }}</h1>
+        <p>{{ housing.city}}, {{ housing.country }}</p>
+        <ion-list>
+            <ion-item>
+                <ion-avatar>
+                    <ion-icon name="people-outline"></ion-icon>
+                </ion-avatar>
+                <ion-label>
+                    {{ housing.number_of_travellers }} voyageurs
+                </ion-label>
+            </ion-item>
+            <ion-item>
+                <ion-avatar>
+                    <ion-icon name="bed-outline"></ion-icon>
+                </ion-avatar>
+                <ion-label>
+                    {{ housing.number_of_bed }} lits · {{ housing.number_of_bedrooms }} chambres
+                </ion-label>
+            </ion-item>
+            <ion-item>
+                <ion-avatar>
+                    <ion-icon name="water-outline"></ion-icon>
+                </ion-avatar>
+                <ion-label>
+                    {{ housing.number_of_bathrooms }} salles de bain
+                </ion-label>
+            </ion-item>
+        </ion-list>
+    </ion-item-group>
+    <ng-template #housing_notfound>
+        <p>Pas de résultat.</p>
+    </ng-template>
+</ion-content>
+
+<!--
+   {
+        "id": 1,
+        "name": "Petit Châlet à la montagne",
+        "description": "Logement remis à neuf. Bien situé. Quartier calme.",
+        "street": "87, boulevard de Prague ",
+        "city": "Noisy Le Grand",
+        "zip_code": "93160",
+        "country": "France",
+        "price_per_day": 35,
+        "surface_area": 50,
+        "number_of_travellers": 4,
+        "number_of_bedrooms": 2,
+        "number_of_bed": 2,
+        "number_of_bathrooms": 2,
+        "created_at": "2020-02-17T18:47:09+01:00",
+        "updated_at": "2020-02-17T18:49:08+01:00",
+        "person": { ... },
+        "images": { ... }
+    }
+-->
