@@ -34,7 +34,7 @@
             "person": { ... }
         }
         -->
-    <a href="/housing?id={{ housing.id}}" *ngFor="let housing of housings">
+    <a href="/tabs/discover/housing?id={{ housing.id}}" *ngFor="let housing of housings">
         <ion-card>
             <!-- Later put real photo -->
             <ion-img [src]="housing.images[0].url" alt="{{ housing.name }}"></ion-img>

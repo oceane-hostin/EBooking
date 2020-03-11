@@ -54,6 +54,10 @@ const routes: Routes = [
             path: '',
             loadChildren: () =>
               import('../discover/discover.module').then(m => m.DiscoverPageModule)
+          },
+          {
+            path: 'housing',
+            loadChildren: '../housing/housing.module#HousingPageModule'
           }
         ]
       },
