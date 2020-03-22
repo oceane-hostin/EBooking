@@ -36,8 +36,7 @@
         -->
     <a href="/tabs/discover/housing?id={{ housing.id}}" *ngFor="let housing of housings">
         <ion-card>
-            <!-- Later put real photo -->
-            <ion-img [src]="housing.images[0].url" alt="{{ housing.name }}"></ion-img>
+            <ion-img src="../../assets/housing/{{housing.images[0].url}}" alt="{{ housing.name }}"></ion-img>
             <ion-text class="price">{{ housing.price_per_day }} € / nuit</ion-text>
             <ion-card-header>
                 <ion-card-subtitle>{{ housing.city }}</ion-card-subtitle>
