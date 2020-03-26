@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-account',
@@ -7,6 +8,18 @@ import { Component } from '@angular/core';
 })
 export class AccountPage {
 
-  constructor() { }
+  constructor(private storage: Storage) {
+    storage.get('session').then((val) => {
+      if(val == null) {
+        window.location.href = "/tabs/account/login";
+      }
+    });
+  }
+
+  logout() {
+    this.storage.remove('session');
+    window.location.href = '/tabs/home';
+  }
+
 
 }

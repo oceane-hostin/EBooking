@@ -1,0 +1,31 @@
+<ion-header [translucent]="true">
+	<ion-toolbar>
+		<ion-title>
+			Connexion
+		</ion-title>
+	</ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+	<ion-header collapse="condense">
+		<ion-toolbar>
+			<ion-title size="large">Connexion</ion-title>
+		</ion-toolbar>
+	</ion-header>
+
+	<form method="post" (submit)="login()" class="ion-margin">
+		<ion-item>
+			<ion-label>E-mail</ion-label>
+			<ion-input type="mail" placeholder="Saisir votre e-mail" [(ngModel)]="email" name="email"></ion-input>
+		</ion-item>
+
+		<ion-item>
+			<ion-label>Mot de passe</ion-label>
+			<ion-input type="password" placeholder="Saisir votre mot de passe" [(ngModel)]="password" name="password"></ion-input>
+		</ion-item>
+
+		<ion-button class="ion-margin-top" expand="block" shape="round" type="submit" >Connexion</ion-button>
+	</form>
+	<a class="ion-text-center" href="/tabs/account/create" color="primary">Pas encore de compte ?</a>
+
+</ion-content>

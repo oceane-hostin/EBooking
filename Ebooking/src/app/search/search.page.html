@@ -17,23 +17,23 @@
 	<form (ngSubmit)="searchForm()">
 		<ion-item>
 			<ion-label>Destination</ion-label>
-			<ion-input type="text" [(ngModel)]="form.destination" name="destination"></ion-input>
+			<ion-input type="text" name="destination"></ion-input>
 		</ion-item>
 
 		<ion-item>
-			<ion-label>Check in</ion-label>
+			<ion-label>Arrivée</ion-label>
 			<ion-datetime displayformat="MM DD YY" placeholder="Select Date"></ion-datetime>
 		</ion-item>
 
 		<ion-item>
-			<ion-label>Check out</ion-label>
+			<ion-label>Départ</ion-label>
 			<ion-datetime displayformat="MM DD YY" placeholder="Select Date"></ion-datetime>
 		</ion-item>
 
 		<ion-item>
-			<ion-label>Rooms</ion-label>
-			<ion-input type="text" [(ngModel)]="form.rooms" name="rooms"></ion-input>
-			<ion-select placeholder="Select One">
+			<ion-label>Chambres</ion-label>
+			<ion-input type="text" name="rooms"></ion-input>
+			<ion-select placeholder="Choisir">
 				<ion-select-option value="1">1</ion-select-option>
 				<ion-select-option value="2">2</ion-select-option>
 				<ion-select-option value="3">3</ion-select-option>
@@ -43,22 +43,8 @@
 		</ion-item>
 
 		<ion-item>
-			<ion-label>Adults</ion-label>
-			<ion-select placeholder="Select One">
-				<ion-select-option value="1">1</ion-select-option>
-				<ion-select-option value="2">2</ion-select-option>
-				<ion-select-option value="3">3</ion-select-option>
-				<ion-select-option value="4">4</ion-select-option>
-				<ion-select-option value="5">5</ion-select-option>
-			</ion-select>
-		</ion-item>
-
-		<ion-item>
-			<ion-label>Children</ion-label>
-			<ion-input type="text" [(ngModel)]="form.children" name="children"></ion-input>
-			<ion-select placeholder="Select One">
-				<ion-select-option value="0">0
-				</ion-select-option>
+			<ion-label>Voyageurs</ion-label>
+			<ion-select placeholder="Choisir">
 				<ion-select-option value="1">1</ion-select-option>
 				<ion-select-option value="2">2</ion-select-option>
 				<ion-select-option value="3">3</ion-select-option>

@@ -1,0 +1,326 @@
+<?php
+
+namespace App\Entity;
+
+use DateTime;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ORM\Entity(repositoryClass="App\Repository\HousingRepository")
+ */
+class Housing
+{
+    /**
+     * @ORM\Id()
+     * @ORM\GeneratedValue()
+     * @ORM\Column(type="integer")
+     */
+    private $id;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $name;
+
+    /**
+     * @ORM\Column(type="text")
+     */
+    private $description;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $street;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $city;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $zipCode;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $country;
+
+    /**
+     * @ORM\Column(type="float")
+     */
+    private $pricePerDay;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $surfaceArea;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $numberOfTravellers;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $numberOfBedrooms;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $numberOfBed;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $numberOfBathrooms;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Person", inversedBy="housings")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $person;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Booking", mappedBy="housing", orphanRemoval=true)
+     */
+    private $bookings;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Image", mappedBy="housing", orphanRemoval=true)
+     */
+    private $images;
+
+    public function __construct()
+    {
+        $this->bookings = new ArrayCollection();
+        $this->images = new ArrayCollection();
+    }
+
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): self
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(string $description): self
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    public function getStreet(): ?string
+    {
+        return $this->street;
+    }
+
+    public function setStreet(string $street): self
+    {
+        $this->street = $street;
+
+        return $this;
+    }
+
+    public function getCity(): ?string
+    {
+        return $this->city;
+    }
+
+    public function setCity(string $city): self
+    {
+        $this->city = $city;
+
+        return $this;
+    }
+
+    public function getZipCode(): ?string
+    {
+        return $this->zipCode;
+    }
+
+    public function setZipCode(string $zipCode): self
+    {
+        $this->zipCode = $zipCode;
+
+        return $this;
+    }
+
+    public function getCountry(): ?string
+    {
+        return $this->country;
+    }
+
+    public function setCountry(string $country): self
+    {
+        $this->country = $country;
+
+        return $this;
+    }
+
+    public function getPricePerDay(): ?float
+    {
+        return $this->pricePerDay;
+    }
+
+    public function setPricePerDay(float $pricePerDay): self
+    {
+        $this->pricePerDay = $pricePerDay;
+
+        return $this;
+    }
+
+    public function getSurfaceArea(): ?int
+    {
+        return $this->surfaceArea;
+    }
+
+    public function setSurfaceArea(int $surfaceArea): self
+    {
+        $this->surfaceArea = $surfaceArea;
+
+        return $this;
+    }
+
+    public function getNumberOfTravellers(): ?int
+    {
+        return $this->numberOfTravellers;
+    }
+
+    public function setNumberOfTravellers(int $numberOfTravellers): self
+    {
+        $this->numberOfTravellers = $numberOfTravellers;
+
+        return $this;
+    }
+
+    public function getNumberOfBedrooms(): ?int
+    {
+        return $this->numberOfBedrooms;
+    }
+
+    public function setNumberOfBedrooms(int $numberOfBedrooms): self
+    {
+        $this->numberOfBedrooms = $numberOfBedrooms;
+
+        return $this;
+    }
+
+    public function getNumberOfBed(): ?int
+    {
+        return $this->numberOfBed;
+    }
+
+    public function setNumberOfBed(int $numberOfBed): self
+    {
+        $this->numberOfBed = $numberOfBed;
+
+        return $this;
+    }
+
+    public function getNumberOfBathrooms(): ?int
+    {
+        return $this->numberOfBathrooms;
+    }
+
+    public function setNumberOfBathrooms(int $numberOfBathrooms): self
+    {
+        $this->numberOfBathrooms = $numberOfBathrooms;
+
+        return $this;
+    }
+
+    public function getPerson(): ?Person
+    {
+        return $this->person;
+    }
+
+    public function setPerson(?Person $person): self
+    {
+        $this->person = $person;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Booking[]
+     */
+    public function getBookings(): Collection
+    {
+        return $this->bookings;
+    }
+
+    public function addBooking(Booking $booking): self
+    {
+        if (!$this->bookings->contains($booking)) {
+            $this->bookings[] = $booking;
+            $booking->setHousing($this);
+        }
+
+        return $this;
+    }
+
+    public function removeBooking(Booking $booking): self
+    {
+        if ($this->bookings->contains($booking)) {
+            $this->bookings->removeElement($booking);
+            // set the owning side to null (unless already changed)
+            if ($booking->getHousing() === $this) {
+                $booking->setHousing(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Image[]
+     */
+    public function getImages(): Collection
+    {
+        return $this->images;
+    }
+
+    public function addImage(Image $image): self
+    {
+        if (!$this->images->contains($image)) {
+            $this->images[] = $image;
+            $image->setHousing($this);
+        }
+
+        return $this;
+    }
+
+    public function removeImage(Image $image): self
+    {
+        if ($this->images->contains($image)) {
+            $this->images->removeElement($image);
+            // set the owning side to null (unless already changed)
+            if ($image->getHousing() === $this) {
+                $image->setHousing(null);
+            }
+        }
+
+        return $this;
+    }
+}

@@ -24,6 +24,16 @@ const routes: Routes = [
             path: '',
             loadChildren: () =>
               import('../account/account.module').then(m => m.AccountPageModule)
+          },
+          {
+            path: 'login',
+            loadChildren: () =>
+              import('../login/login.module').then(m => m.LoginPageModule)
+          },
+          {
+            path: 'create',
+            loadChildren: () =>
+              import('../create-account/create-account.module').then(m => m.CreateAccountPageModule)
           }
         ]
       },
