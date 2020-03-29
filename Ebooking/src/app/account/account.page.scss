@@ -1,45 +1,41 @@
-ion-content ion-toolbar {
-  --background: translucent;
-}
+ion-content {
+  ion-toolbar {
+    --background: translucent;
+  }
 
-.flex {
-  display: flex;
-  justify-content: space-between;
-}
+  .profile-header {
+    text-align: center;
+    position: relative;
+    min-height: 100px;
+    margin-top: -18x;
+    padding: 40px 20px;
+    //--background: url(../../assets/others/accountpattern.png) no-repeat center/cover fixed;
 
-:root {
-  /** facebook **/
-  --ion-color-facebook: #3b5999;
-  --ion-color-facebook-rgb: 59, 89, 153;
-  --ion-color-facebook-contrast: #ffffff;
-  --ion-color-facebook-contrast-rgb: 255, 255, 255;
-  --ion-color-facebook-shade: #324b81;
-  --ion-color-facebook-tint: #476bb8;
+    ion-img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      z-index: 0;
+    }
 
-  /** google **/
-  --ion-color-google: #cd201f;
-  --ion-color-google-rgb: 245, 61, 61;
-  --ion-color-google-contrast: #ffffff;
-  --ion-color-google-contrast-rgb: 255, 255, 255;
-  --ion-color-google-shade: #cd201f;
-  --ion-color-google-tint: #cd201f;
+    > ion-item-group {
+      padding: 10px;
+      background-color: rgba(255,255,255,0.9);
+      position: relative;
+      display: inline-block;
 
+      ion-text {
+        z-index: 5;
+        display: block;
+      }
 
-}
-
-.ion-color-facebook {
-  --ion-color-base: var(--ion-color-facebook) !important;
-  --ion-color-base-rgb: var(--ion-color-facebook-rgb) !important;
-  --ion-color-contrast: var(--ion-color-facebook-contrast) !important;
-  --ion-color-contrast-rgb: var(--ion-color-facebook-contrast-rgb) !important;
-  --ion-color-shade: var(--ion-color-facebook-shade) !important;
-  --ion-color-tint: var(--ion-color-facebook-tint) !important;
-}
-.ion-color-google {
-  --ion-color-base: var(--ion-color-google) !important;
-  --ion-color-base-rgb: var(--ion-color-google-rgb) !important;
-  --ion-color-contrast: var(--ion-color-google-contrast) !important;
-  --ion-color-contrast-rgb: var(--ion-color-google-contrast-rgb) !important;
-  --ion-color-shade: var(--ion-color-google-shade) !important;
-  --ion-color-tint: var(--ion-color-google-tint) !important;
+      h1 {
+        margin-top: 0;
+      }
+    }
+  }
 }

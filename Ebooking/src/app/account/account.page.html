@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
 	<ion-toolbar>
 		<ion-title>
-			Account
+			Mon Compte
 		</ion-title>
 	</ion-toolbar>
 </ion-header>
@@ -9,10 +9,35 @@
 <ion-content [fullscreen]="true">
 	<ion-header collapse="condense">
 		<ion-toolbar>
-			<ion-title size="large">Account</ion-title>
+			<ion-title size="large">Mon Compte</ion-title>
+			<ion-buttons slot="primary">
+				<ion-button (click)="logout()">
+					<ion-icon color="primary" slot="icon-only" name="log-out-outline" class="ion-margin-end"></ion-icon>
+				</ion-button>
+			</ion-buttons>
 		</ion-toolbar>
 	</ion-header>
-
-	<ion-button (click)="logout()">Déconnection</ion-button>
-
+	<ion-progress-bar *ngIf="!firstName" type="indeterminate"></ion-progress-bar>
+	<ion-item-group *ngIf="firstName" class="profile-header">
+		<ion-img src="../../assets/others/accountpattern.png"></ion-img>
+		<ion-item-group>
+			<ion-text color="primary"><h1>{{firstName}} {{lastName}}</h1></ion-text>
+			<ion-text color="tertiary">{{email}}</ion-text>
+			<ion-text color="tertiary">{{dateOfBirth | date: 'dd/MM/yyyy'}}</ion-text>
+		</ion-item-group>
+	</ion-item-group>
+	<ion-item-group *ngIf="bookings" class="ion-padding">
+		<ion-text color="secondary"><h2>Mes réservations</h2></ion-text>
+		<ion-item-group *ngFor="let book of bookings">
+			<ion-text>{{booking.housing.name}}</ion-text>
+		</ion-item-group>
+		<ion-text *ngIf="bookings.length == 0">Pas de réservation !</ion-text>
+	</ion-item-group>
+	<ion-item-group *ngIf="housings" class="ion-padding">
+		<ion-text color="secondary"><h2>Mes biens</h2></ion-text>
+		<ion-item-group *ngFor="let housing of housings">
+			<ion-text>{{housing.name}}</ion-text>
+		</ion-item-group>
+		<ion-text *ngIf="housings.length == 0">Pas de biens !</ion-text>
+	</ion-item-group>
 </ion-content>
