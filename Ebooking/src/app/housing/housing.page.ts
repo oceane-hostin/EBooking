@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import {AppModule} from "../app.module";
 
 @Component({
   selector: 'app-housing',
@@ -19,7 +20,12 @@ export class HousingPage {
         if(idHousing) {
             this.http.get(apiBaseUrl + 'housing/read/id/' + idHousing).subscribe((response) => {
                 if(response != null) {
-                    this.housing = response;
+                    var housing = response;
+                    // @ts-ignore
+                    housing.created_at = AppModule.reformatDate(housing.created_at);
+                    // @ts-ignore
+                    housing.updated_at = AppModule.reformatDate(housing.updated_at);
+                    this.housing = housing;
                 } else {
                     this.housing = "notfound";
                 }

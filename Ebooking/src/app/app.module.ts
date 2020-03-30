@@ -28,4 +28,10 @@ import { IonicStorageModule } from '@ionic/storage';
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule {
+  public static reformatDate(date) {
+    date = date.split('CEST')[0];
+    date = date.split('CET')[0];
+    return date;
+  }
+}

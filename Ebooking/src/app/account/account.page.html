@@ -28,16 +28,44 @@
 	</ion-item-group>
 	<ion-item-group *ngIf="bookings" class="ion-padding">
 		<ion-text color="secondary"><h2>Mes réservations</h2></ion-text>
-		<ion-item-group *ngFor="let book of bookings">
-			<ion-text>{{booking.housing.name}}</ion-text>
+		<a href="/tabs/account/booking?id={{ book.id }}" class="housing-card" *ngFor="let book of bookings">
+			<ion-card>
+				<ion-img src="../../assets/housing/{{book.housing.images[0].url}}" alt="{{ book.housing.name }}"></ion-img>
+				<ion-text class="price">{{ book.beginning_date | date : "d MMM" }} - {{ book.ending_date | date : "d MMM" }}</ion-text>
+				<ion-card-header>
+					<ion-card-subtitle>{{ book.housing.city }}</ion-card-subtitle>
+					<ion-card-title>{{ book.housing.name }}</ion-card-title>
+				</ion-card-header>
+
+				<ion-card-content>
+					{{ book.housing.description }}
+				</ion-card-content>
+			</ion-card>
+		</a>
+		<ion-item-group class="empty-list" *ngIf="bookings.length == 0">
+			<img src="../../assets/icon/housing.png" alt="house icon"/>
+			<ion-text>Vous n'avez pas encore de réservations</ion-text>
 		</ion-item-group>
-		<ion-text *ngIf="bookings.length == 0">Pas de réservation !</ion-text>
 	</ion-item-group>
 	<ion-item-group *ngIf="housings" class="ion-padding">
-		<ion-text color="secondary"><h2>Mes biens</h2></ion-text>
-		<ion-item-group *ngFor="let housing of housings">
-			<ion-text>{{housing.name}}</ion-text>
+		<ion-text color="secondary"><h2>Mes annonces</h2></ion-text>
+		<a href="/tabs/account/housing?id={{ housing.id}}" class="housing-card" *ngFor="let housing of housings">
+			<ion-card>
+				<ion-img src="../../assets/housing/{{housing.images[0].url}}" alt="{{ housing.name }}"></ion-img>
+				<ion-text class="price">{{ housing.price_per_day }} € / nuit</ion-text>
+				<ion-card-header>
+					<ion-card-subtitle>{{ housing.city }}</ion-card-subtitle>
+					<ion-card-title>{{ housing.name }}</ion-card-title>
+				</ion-card-header>
+
+				<ion-card-content>
+					{{ housing.description }}
+				</ion-card-content>
+			</ion-card>
+		</a>
+		<ion-item-group class="empty-list" *ngIf="housings.length == 0">
+			<img src="../../assets/icon/housing.png" alt="house icon"/>
+			<ion-text>Vous n'avez pas encore d'annonces</ion-text>
 		</ion-item-group>
-		<ion-text *ngIf="housings.length == 0">Pas de biens !</ion-text>
 	</ion-item-group>
 </ion-content>

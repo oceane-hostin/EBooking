@@ -8,12 +8,14 @@ import {HttpClient} from "@angular/common/http";
   styleUrls: ['login.page.scss']
 })
 export class LoginPage {
+  public form;
 
   constructor(private http: HttpClient, private storage: Storage) {
 
   }
 
   login() {
+    this.form = "wait";
     // @ts-ignore
     var email = this.email;
     // @ts-ignore

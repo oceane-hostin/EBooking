@@ -8,12 +8,14 @@ import { HttpClient } from "@angular/common/http";
     styleUrls: ['create-account.page.scss']
 })
 export class CreateAccountPage {
+    public form;
 
     constructor(private http: HttpClient, private storage: Storage) {
 
     }
 
     register() {
+        this.form = "wait";
         // @ts-ignore
         var firstName = this.first_name;
         // @ts-ignore
