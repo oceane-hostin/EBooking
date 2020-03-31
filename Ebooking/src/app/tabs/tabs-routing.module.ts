@@ -39,6 +39,11 @@ const routes: Routes = [
             path: 'housing',
             loadChildren: () =>
                 import('../housing/housing.module').then(m => m.HousingPageModule)
+          },
+          {
+            path: 'booking',
+            loadChildren: () =>
+                import('../booking/booking.module').then(m => m.BookingPageModule)
           }
         ]
       },

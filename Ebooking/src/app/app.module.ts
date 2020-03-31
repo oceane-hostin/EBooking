@@ -34,4 +34,8 @@ export class AppModule {
     date = date.split('CET')[0];
     return date;
   }
+
+  public static getApiUrl() {
+      return "http://127.0.0.1:8000/";
+  }
 }

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
+import {AppModule} from "../app.module";
 
 @Component({
   selector: 'app-home',
@@ -11,7 +12,7 @@ export class HomePage {
   public cities;
 
   constructor(private http: HttpClient) {
-    var apiBaseUrl = "http://127.0.0.1:8000/"; // TODO: put the right base url somewhere
+    var apiBaseUrl = AppModule.getApiUrl();
     this.http.get(apiBaseUrl + 'housing/cities').subscribe((response) => {
       if(response != null) {
         this.cities = response;

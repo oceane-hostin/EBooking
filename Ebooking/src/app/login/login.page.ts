@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import {HttpClient} from "@angular/common/http";
+import {AppModule} from "../app.module";
 
 @Component({
   selector: 'app-login',
@@ -21,7 +22,7 @@ export class LoginPage {
     // @ts-ignore
     var password = this.password;
 
-    var apiBaseUrl = "http://127.0.0.1:8000/";
+    var apiBaseUrl = AppModule.getApiUrl();
 
     this.http.post(apiBaseUrl + 'person/connect', {'email' :email, 'password' : password}).subscribe((response) => {
       // response having status and info values

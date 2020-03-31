@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import {AppModule} from "../app.module";
 
 @Component({
   selector: 'app-discover',
@@ -10,8 +11,7 @@ export class DiscoverPage {
     public housings;
 
     constructor(private http: HttpClient) {
-        // put the right base url somewhere
-        var apiBaseUrl = "http://127.0.0.1:8000/";
+        var apiBaseUrl = AppModule.getApiUrl();
         this.http.get(apiBaseUrl + 'housing/read/').subscribe((response) => {
             this.housings = response;
         });

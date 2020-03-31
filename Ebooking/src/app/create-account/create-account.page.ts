@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { HttpClient } from "@angular/common/http";
+import {AppModule} from "../app.module";
 
 @Component({
     selector: 'app-create-account',
@@ -29,7 +30,7 @@ export class CreateAccountPage {
 
         var person = '{ "first_name": "'+firstName+'", "last_name": "'+lastName+'", "email": "'+email+'", "password": "'+password+'", "date_of_birth": "'+dateOfBirth+'", "is_admin": false }';
 
-        var apiBaseUrl = "http://127.0.0.1:8000/";
+        var apiBaseUrl = AppModule.getApiUrl();
         this.http.post(apiBaseUrl + 'person/create', person).subscribe((response) => {
             // response having status and info values
             // @ts-ignore

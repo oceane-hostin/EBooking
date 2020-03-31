@@ -13,7 +13,7 @@ export class HousingPage {
     public parent;
 
     constructor(private http: HttpClient) {
-        var apiBaseUrl = "http://127.0.0.1:8000/"; // TODO: put the right base url somewhere
+        var apiBaseUrl = AppModule.getApiUrl();
         var currentUrl = window.location.href; // get url
         var idHousing = currentUrl.split('?id=')[1]; // get housing id from url
         this.parent = currentUrl.split("/tabs/")[1].split("/housing")[0]; // get the parent tabs for back button

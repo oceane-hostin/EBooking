@@ -10,10 +10,7 @@ import {AppModule} from "../app.module";
 })
 export class AccountPage {
     private id;
-    private firstName;
-    private lastName;
-    private email;
-    private dateOfBirth;
+    public person;
     private housings;
     private bookings;
 
@@ -24,18 +21,12 @@ export class AccountPage {
                 window.location.href = "/tabs/account/login";
             } else {
                 this.id = val;
-                var apiBaseUrl = "http://127.0.0.1:8000/";
+                var apiBaseUrl = AppModule.getApiUrl();
                 this.http.get(apiBaseUrl + 'person/read/id/' + this.id).subscribe((response) => {
+                    var person = response;
                     // @ts-ignore
-                    this.firstName = response.first_name;
-                    // @ts-ignore
-                    this.lastName = response.last_name;
-                    // @ts-ignore
-                    this.email = response.email;
-                    // @ts-ignore
-                    var date = response.date_of_birth;
-                    date = date.split('CEST')[0];
-                    this.dateOfBirth = new Date(date);
+                    person.date_of_birth = AppModule.reformatDate(person.date_of_birth);
+                    this.person = person;
                     // @ts-ignore
                     this.housings = response.housings;
                     // @ts-ignore
@@ -45,6 +36,7 @@ export class AccountPage {
                         booking.ending_date = AppModule.reformatDate(booking.ending_date);
                     });
                     this.bookings = bookings;
+
                 });
             }
         });

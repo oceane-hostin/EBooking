@@ -17,13 +17,14 @@
 			</ion-buttons>
 		</ion-toolbar>
 	</ion-header>
-	<ion-progress-bar *ngIf="!firstName" type="indeterminate"></ion-progress-bar>
-	<ion-item-group *ngIf="firstName" class="profile-header">
+	<ion-progress-bar *ngIf="!person" type="indeterminate"></ion-progress-bar>
+	<ion-item-group *ngIf="person" class="profile-header">
 		<ion-img src="../../assets/others/accountpattern.png"></ion-img>
 		<ion-item-group>
-			<ion-text color="primary"><h1>{{firstName}} {{lastName}}</h1></ion-text>
-			<ion-text color="tertiary">{{email}}</ion-text>
-			<ion-text color="tertiary">{{dateOfBirth | date: 'dd/MM/yyyy'}}</ion-text>
+			<ion-text color="primary"><h1>{{person.first_name}} {{person.last_name}}</h1></ion-text>
+			<ion-text color="tertiary">{{person.email}}</ion-text>
+			<ion-text color="tertiary">{{person.date_of_birth | date: 'dd/MM/yyyy'}}</ion-text>
+            <a class="ion-margin-top" href="/tabs/account/update">Modifier</a>
 		</ion-item-group>
 	</ion-item-group>
 	<ion-item-group *ngIf="bookings" class="ion-padding">
