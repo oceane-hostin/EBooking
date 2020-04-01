@@ -53,12 +53,12 @@ const routes: Routes = [
         ]
       },
       {
-        path: 'favorite',
+        path: 'housing/create',
         children: [
           {
             path: '',
             loadChildren: () =>
-              import('../favorite/favorite.module').then(m => m.FavoritePageModule)
+              import('../create-housing/create-housing.module').then(m => m.CreateHousingPageModule)
           }
         ]
       },

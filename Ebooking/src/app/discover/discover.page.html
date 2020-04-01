@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
     <ion-toolbar>
         <ion-title>
-            Discover
+            Voyager
         </ion-title>
     </ion-toolbar>
 </ion-header>
@@ -9,34 +9,15 @@
 <ion-content [fullscreen]="true">
     <ion-header collapse="condense">
         <ion-toolbar>
-            <ion-title size="large">Discover</ion-title>
+            <ion-title size="large">Voyager</ion-title>
         </ion-toolbar>
     </ion-header>
 
     <ion-progress-bar *ngIf="!housings" type="indeterminate"></ion-progress-bar>
-    <!--
-        {
-            "id": 1,
-            "name": "Petit Châlet à la montagne",
-            "description": "Logement remis à neuf. Bien situé. Quartier calme.",
-            "street": "87, boulevard de Prague ",
-            "city": "Noisy Le Grand",
-            "zip_code": "93160",
-            "country": "France",
-            "price_per_day": 35,
-            "surface_area": 50,
-            "number_of_travellers": 4,
-            "number_of_bedrooms": 2,
-            "number_of_bed": 2,
-            "number_of_bathrooms": 2,
-            "created_at": "2020-02-17T18:47:09+01:00",
-            "updated_at": "2020-02-17T18:49:08+01:00",
-            "person": { ... }
-        }
-        -->
     <a href="/tabs/discover/housing?id={{ housing.id}}" *ngFor="let housing of housings">
         <ion-card>
-            <ion-img src="../../assets/housing/{{housing.images[0].url}}" alt="{{ housing.name }}"></ion-img>
+            <ion-img *ngIf="housing.images[0];else placeholder" src="../../assets/housing/{{housing.images[0].url}}" alt="{{ housing.name }}"></ion-img>
+            <ng-template #placeholder><ion-img src="../../assets/housing/placeholder.jpg" alt="{{ housing.name }}"></ion-img></ng-template>
             <ion-text class="price">{{ housing.price_per_day }} € / nuit</ion-text>
             <ion-card-header>
                 <ion-card-subtitle>{{ housing.city }}</ion-card-subtitle>

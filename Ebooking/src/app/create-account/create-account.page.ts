@@ -18,17 +18,7 @@ export class CreateAccountPage {
     register() {
         this.form = "wait";
         // @ts-ignore
-        var firstName = this.first_name;
-        // @ts-ignore
-        var lastName = this.last_name;
-        // @ts-ignore
-        var email = this.email;
-        // @ts-ignore
-        var password = this.password;
-        // @ts-ignore
-        var dateOfBirth = this.date_of_birth;
-
-        var person = '{ "first_name": "'+firstName+'", "last_name": "'+lastName+'", "email": "'+email+'", "password": "'+password+'", "date_of_birth": "'+dateOfBirth+'", "is_admin": false }';
+        var person = '{ "first_name": "'+this.first_name+'", "last_name": "'+this.last_name+'", "email": "'+this.email+'", "password": "'+this.password+'", "date_of_birth": "'+this.date_of_birth+'", "is_admin": false }';
 
         var apiBaseUrl = AppModule.getApiUrl();
         this.http.post(apiBaseUrl + 'person/create', person).subscribe((response) => {

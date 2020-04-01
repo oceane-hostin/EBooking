@@ -3,7 +3,7 @@ import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { FavoritePage } from './favorite.page';
+import { CreateHousingPage } from './create-housing.page';
 import { ExploreContainerComponentModule } from '../explore-container/explore-container.module';
 
 @NgModule({
@@ -12,8 +12,8 @@ import { ExploreContainerComponentModule } from '../explore-container/explore-co
     CommonModule,
     FormsModule,
     ExploreContainerComponentModule,
-    RouterModule.forChild([{ path: '', component: FavoritePage }])
+    RouterModule.forChild([{ path: '', component: CreateHousingPage }])
   ],
-  declarations: [FavoritePage]
+  declarations: [CreateHousingPage]
 })
-export class FavoritePageModule { }
+export class CreateHousingPageModule { }

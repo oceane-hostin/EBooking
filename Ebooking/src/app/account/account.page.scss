@@ -1,5 +1,5 @@
 ion-content {
-	padding-bottom: 10px;
+	margin-bottom: 20px;
 
 	ion-toolbar {
 		--background: translucent;
@@ -89,7 +89,7 @@ ion-content {
 		max-width: 200px;
 	}
 
-	> ion-text {
+	ion-text p {
 		text-align: center;
 	}
 }
