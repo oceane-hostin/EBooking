@@ -35,7 +35,6 @@ export class CreateAccountPage {
             // response having status and info values
             // @ts-ignore
             if(response.status == "success") {
-                console.log(response);
                 // @ts-ignore
                 this.storage.set("session", response.info);
                 window.location.href = "/tabs/account/";

@@ -9,6 +9,7 @@ import {AppModule} from "../app.module";
     styleUrls: ['account.page.scss']
 })
 export class AccountPage {
+    public apiBaseUrl;
     private id;
     public person;
     private housings;
@@ -16,13 +17,18 @@ export class AccountPage {
 
 
     constructor(private storage: Storage, private http: HttpClient) {
+        this.apiBaseUrl = AppModule.getApiUrl();
+
         storage.get('session').then((val) => {
             if (val == null) {
                 window.location.href = "/tabs/account/login";
             } else {
                 this.id = val;
-                var apiBaseUrl = AppModule.getApiUrl();
-                this.http.get(apiBaseUrl + 'person/read/id/' + this.id).subscribe((response) => {
+                this.http.get(this.apiBaseUrl + 'person/read/id/' + this.id).subscribe((response) => {
+                    if(response == null) {
+                        this.storage.remove('session');
+                        window.location.href = "/tabs/account/login";
+                    }
                     var person = response;
                     // @ts-ignore
                     person.date_of_birth = AppModule.reformatDate(person.date_of_birth);
@@ -40,27 +46,23 @@ export class AccountPage {
                 });
             }
         });
-
-
-        /*{
-            "id": 8,
-            "first_name": "undefined",
-            "last_name": "a",
-            "email": "a",
-            "password": "123",
-            "date_of_birth": "1999-01-01T15:31:16.000000CEST",
-            "is_admin": false,
-            "created_at": "2020-03-29T15:32:47.000000CEST",
-            "updated_at": "2020-03-29T15:32:47.000000CEST",
-            "housings": [],
-            "bookings": []
-        }*/
-
     }
 
     logout() {
         this.storage.remove('session');
         window.location.href = '/tabs/home';
+    }
+
+    deleteAccount() {
+        this.http.delete(this.apiBaseUrl + 'person/delete/'+this.person.id).subscribe((response) => {
+            // @ts-ignore
+            if(response.status == "success") {
+                this.storage.remove('session');
+                window.location.href = '/';
+            } else {
+                alert("Compte non supprimer");
+            }
+        });
     }
 
 }

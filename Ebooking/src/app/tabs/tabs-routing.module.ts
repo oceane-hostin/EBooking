@@ -36,6 +36,11 @@ const routes: Routes = [
               import('../create-account/create-account.module').then(m => m.CreateAccountPageModule)
           },
           {
+            path: 'update',
+            loadChildren: () =>
+              import('../update-account/update-account.module').then(m => m.UpdateAccountPageModule)
+          },
+          {
             path: 'housing',
             loadChildren: () =>
                 import('../housing/housing.module').then(m => m.HousingPageModule)

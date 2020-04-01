@@ -1,4 +1,6 @@
 ion-content {
+	padding-bottom: 10px;
+
 	ion-toolbar {
 		--background: translucent;
 	}
@@ -79,5 +81,15 @@ ion-content {
 			}
 		}
 
+	}
+
+	ion-button {
+		display: block;
+		margin: 10px auto;
+		max-width: 200px;
+	}
+
+	> ion-text {
+		text-align: center;
 	}
 }

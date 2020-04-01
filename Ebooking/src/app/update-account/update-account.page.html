@@ -1,0 +1,44 @@
+<ion-header [translucent]="true">
+	<ion-toolbar>
+		<ion-title>
+			Modifier mon compte
+		</ion-title>
+	</ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+	<ion-header collapse="condense">
+		<ion-toolbar>
+			<ion-title size="large">Modifier mon compte</ion-title>
+		</ion-toolbar>
+	</ion-header>
+	<ion-progress-bar *ngIf="form || !person" type="indeterminate"></ion-progress-bar>
+	<form method="post" *ngIf="person" (submit)="update()" class="ion-margin">
+		<ion-item>
+			<ion-label>Prénom</ion-label>
+			<ion-input type="text" placeholder="Saisir votre prénom" [(ngModel)]="person.first_name" name="first_name" required="required"></ion-input>
+		</ion-item>
+
+		<ion-item>
+			<ion-label>Nom</ion-label>
+			<ion-input type="text" placeholder="Saisir votre nom" [(ngModel)]="person.last_name" name="last_name" required="required"></ion-input>
+		</ion-item>
+
+		<ion-item>
+			<ion-label>E-mail</ion-label>
+			<ion-input type="mail" placeholder="Saisir votre e-mail" [(ngModel)]="person.email" name="email" required="required"></ion-input>
+		</ion-item>
+
+		<ion-item>
+			<ion-label>Mot de passe</ion-label>
+			<ion-input type="password" placeholder="Choisir votre mot de passe" [(ngModel)]="person.password" name="password" required="required"></ion-input>
+		</ion-item>
+
+		<ion-item>
+			<ion-label>Date de naissance</ion-label>
+			<ion-datetime display-format="DD/MM/YYYY" picker-format="DD/MM/YYYY" placeholder="01/01/1900" [(ngModel)]="date_of_birth" name="date_of_birth" required="required"></ion-datetime>
+		</ion-item>
+
+		<ion-button class="ion-margin-top" expand="block" shape="round" type="submit" >Enregistrer</ion-button>
+	</form>
+</ion-content>
