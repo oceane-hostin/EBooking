@@ -11,10 +11,12 @@
 <ion-content [fullscreen]="true" *ngIf="housing">
     <ion-item-group *ngIf="housing.id; else housing_notfound">
         <ion-item-group class="visual-content">
-            <ion-img src="../../assets/housing/{{housing.images[0].url}}" alt="{{ housing.name }}"></ion-img>
+            <ion-img *ngIf="housing.images[0];else placeholder" src="../../assets/housing/{{housing.images[0].url}}" alt="{{ housing.name }}"></ion-img>
+            <ng-template #placeholder><ion-img src="../../assets/housing/placeholder.jpg" alt="{{ housing.name }}"></ion-img></ng-template>
             <ion-text class="price">{{ housing.price_per_day }} € / nuit</ion-text>
             <ion-text class="date">Mis en ligne le {{ housing.created_at | date: 'dd/MM/yyyy' }} par {{ housing.person.first_name }} {{ housing.person.last_name }}</ion-text>
         </ion-item-group>
+        <a *ngIf="canDelete == true"  href="/tabs/account/housing/update/?id={{ housing.id }}">Modifier</a>
         <ion-item-group class="text-content">
             <h1>{{ housing.name }}</h1>
             <p>{{ housing.city}}, {{ housing.country }}</p>
@@ -50,26 +52,6 @@
     <ng-template #housing_notfound>
         <p>Pas de résultat.</p>
     </ng-template>
+    <ion-button *ngIf="canDelete == true" (click)="deleteHousing()">Supprimer l'annonce</ion-button>
+    <ion-text  *ngIf="canDelete == true" class="ion-margin-bottom" color="danger"><p>Attention cette action est irréversible !</p></ion-text>
 </ion-content>
-
-<!--
-   {
-        "id": 1,
-        "name": "Petit Châlet à la montagne",
-        "description": "Logement remis à neuf. Bien situé. Quartier calme.",
-        "street": "87, boulevard de Prague ",
-        "city": "Noisy Le Grand",
-        "zip_code": "93160",
-        "country": "France",
-        "price_per_day": 35,
-        "surface_area": 50,
-        "number_of_travellers": 4,
-        "number_of_bedrooms": 2,
-        "number_of_bed": 2,
-        "number_of_bathrooms": 2,
-        "created_at": "2020-02-17T18:47:09+01:00",
-        "updated_at": "2020-02-17T18:49:08+01:00",
-        "person": { ... },
-        "images": { ... }
-    }
--->

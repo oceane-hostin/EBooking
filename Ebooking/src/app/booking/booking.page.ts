@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {AppModule} from "../app.module";
+import {Storage} from "@ionic/storage";
 
 @Component({
   selector: 'app-booking',
@@ -9,30 +10,44 @@ import {AppModule} from "../app.module";
 })
 
 export class BookingPage {
+    public userId;
     public booking;
     public housing;
     public parent;
     public apiBaseUrl;
 
-    constructor(private http: HttpClient) {
+    constructor(private http: HttpClient, private storage: Storage) {
+        storage.get('session').then((val) => {
+            if (val == null) {
+                window.location.href = "/tabs/account/login";
+            } else {
+                this.userId = val;
+                this.http.get(this.apiBaseUrl + 'person/read/id/' + this.userId).subscribe((response) => {
+                    if (response == null) {
+                        this.storage.remove('session');
+                        window.location.href = "/tabs/account/login";
+                    }
+                    // @ts-ignore
+                    this.userId = response.id;
+                });
+            }
+        });
+
+
         this.apiBaseUrl = AppModule.getApiUrl();
         var currentUrl = window.location.href; // get url
-        var idBooking = currentUrl.split('?id=')[1]; // get housing id from url
+        var idBooking = currentUrl.split('?id=')[1]; // get booking id from url
         this.parent = currentUrl.split("/tabs/")[1].split("/booking")[0]; // get the parent tabs for back button
         if(idBooking) {
             this.http.get(this.apiBaseUrl + 'booking/read/id/' + idBooking).subscribe((response) => {
                 if(response != null) {
-                    /*{
-                        "id": 1,
-                        "beginning_date": "2020-02-11T00:00:00+01:00",
-                        "ending_date": "2020-02-21T00:00:00+01:00",
-                        "housing": { ... },
-                        "person": { ... },
-                        "is_confirmed": false,
-                        "created_at": "2020-02-17T00:00:00+01:00",
-                        "updated_at": "2020-02-17T00:00:00+01:00"
-                    }*/
                     var booking = response;
+
+                    // @ts-ignore
+                    if(booking.person.id != this.userId) {
+                        window.location.href = "/tabs/account";
+                    }
+
                     // @ts-ignore
                     booking.beginning_date = AppModule.reformatDate(booking.beginning_date);
                     // @ts-ignore

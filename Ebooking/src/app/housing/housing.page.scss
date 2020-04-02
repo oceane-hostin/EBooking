@@ -60,4 +60,14 @@ ion-content {
 			}
 		}
 	}
+
+	ion-button {
+		display: block;
+		margin: 10px auto;
+		max-width: 200px;
+	}
+
+	ion-text p {
+		text-align: center;
+	}
 }

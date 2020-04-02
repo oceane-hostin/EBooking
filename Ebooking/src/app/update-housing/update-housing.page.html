@@ -1,0 +1,103 @@
+<ion-header [translucent]="true">
+	<ion-toolbar>
+		<ion-title>
+			Modifier mon compte
+		</ion-title>
+	</ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+	<ion-header collapse="condense">
+		<ion-toolbar>
+			<ion-title size="large">Modifier mon compte</ion-title>
+		</ion-toolbar>
+	</ion-header>
+	<ion-progress-bar *ngIf="form || !housing" type="indeterminate"></ion-progress-bar>
+	<form method="post" *ngIf="housing" (submit)="update()" class="ion-margin">
+		<ion-item>
+			<ion-label>Title</ion-label>
+			<ion-input type="text" placeholder="Saisir le titre" [(ngModel)]="housing.name" name="housing.name" required="required"></ion-input>
+		</ion-item>
+
+		<ion-item>
+			<ion-label>Rue</ion-label>
+			<ion-input type="text" placeholder="Saisir la rue" [(ngModel)]="housing.street" name="housing.street" required="required"></ion-input>
+		</ion-item>
+
+		<ion-item>
+			<ion-label>Code postal</ion-label>
+			<ion-input type="text" placeholder="Saisir le code postal" [(ngModel)]="housing.zip_code" name="housing.zip_code" required="required"></ion-input>
+		</ion-item>
+
+		<ion-item>
+			<ion-label>Ville</ion-label>
+			<ion-input type="text" placeholder="Saisir la ville" [(ngModel)]="housing.city" name="housing.city" required="required"></ion-input>
+		</ion-item>
+
+		<ion-item>
+			<ion-label>Pays</ion-label>
+			<ion-input type="text" placeholder="Saisir le pays" [(ngModel)]="housing.country" name="housing.country" required="required"></ion-input>
+		</ion-item>
+
+		<ion-item>
+			<ion-label>Prix par jour</ion-label>
+			<ion-input type="number" placeholder="Saisir le prix par jour" [(ngModel)]="housing.price_per_day" name="housing.price_per_day" required="required"></ion-input>
+		</ion-item>
+
+		<ion-item>
+			<ion-label>Surface en m²</ion-label>
+			<ion-input type="number" placeholder="Saisir la surface" [(ngModel)]="housing.surface_area" name="housing.surface_area" required="required"></ion-input>
+		</ion-item>
+
+		<ion-item>
+			<ion-label>Nombre de voyageurs</ion-label>
+			<ion-select placeholder="Choisir" [(ngModel)]="housing.number_of_travellers" name="housing.number_of_travellers" required="required">
+				<ion-select-option value="1">1</ion-select-option>
+				<ion-select-option value="2">2</ion-select-option>
+				<ion-select-option value="3">3</ion-select-option>
+				<ion-select-option value="4">4</ion-select-option>
+				<ion-select-option value="5">5</ion-select-option>
+			</ion-select>
+		</ion-item>
+
+		<ion-item>
+			<ion-label>Nombre de chambres</ion-label>
+			<ion-select placeholder="Choisir" [(ngModel)]="housing.number_of_bedrooms" name="housing.number_of_bedrooms" required="required">
+				<ion-select-option value="1">1</ion-select-option>
+				<ion-select-option value="2">2</ion-select-option>
+				<ion-select-option value="3">3</ion-select-option>
+				<ion-select-option value="4">4</ion-select-option>
+				<ion-select-option value="5">5</ion-select-option>
+			</ion-select>
+		</ion-item>
+
+		<ion-item>
+			<ion-label>Nombre de lits</ion-label>
+			<ion-select placeholder="Choisir" [(ngModel)]="housing.number_of_bed" name="housing.number_of_bed" required="required">
+				<ion-select-option value="1">1</ion-select-option>
+				<ion-select-option value="2">2</ion-select-option>
+				<ion-select-option value="3">3</ion-select-option>
+				<ion-select-option value="4">4</ion-select-option>
+				<ion-select-option value="5">5</ion-select-option>
+			</ion-select>
+		</ion-item>
+
+		<ion-item>
+			<ion-label>Nombre de salles de bains</ion-label>
+			<ion-select placeholder="Choisir" [(ngModel)]="housing.number_of_bathrooms" name="housing.number_of_bathrooms" required="required">
+				<ion-select-option value="1">1</ion-select-option>
+				<ion-select-option value="2">2</ion-select-option>
+				<ion-select-option value="3">3</ion-select-option>
+				<ion-select-option value="4">4</ion-select-option>
+				<ion-select-option value="5">5</ion-select-option>
+			</ion-select>
+		</ion-item>
+
+		<ion-item>
+			<ion-label>Description</ion-label>
+			<ion-textarea type="text" placeholder="Saisir une description" [(ngModel)]="housing.description" name="housing.description" required="required"></ion-textarea>
+		</ion-item>
+
+		<ion-button class="ion-margin-top" expand="block" shape="round" type="submit" >Enregistrer</ion-button>
+	</form>
+</ion-content>
