@@ -4,12 +4,12 @@ import {AppModule} from "../app.module";
 import {Storage} from "@ionic/storage";
 
 @Component({
-  selector: 'app-booking',
-  templateUrl: 'booking.page.html',
-  styleUrls: ['booking.page.scss']
+  selector: 'app-create-booking',
+  templateUrl: 'create-booking.page.html',
+  styleUrls: ['create-booking.page.scss']
 })
 
-export class BookingPage {
+export class CreateBookingPage {
     public userId;
     public booking;
     public housing;
@@ -19,7 +19,7 @@ export class BookingPage {
     constructor(private http: HttpClient, private storage: Storage) {
         this.apiBaseUrl = AppModule.getApiUrl();
 
-        storage.get('session').then((val) => {
+       /* storage.get('session').then((val) => {
             if (val == null) {
                 window.location.href = "/tabs/account/login";
             } else {
@@ -34,6 +34,7 @@ export class BookingPage {
                 });
             }
         });
+
 
         var currentUrl = window.location.href; // get url
         var idBooking = currentUrl.split('?id=')[1]; // get booking id from url
@@ -66,18 +67,6 @@ export class BookingPage {
                     this.housing = "notfound";
                 }
             });
-        }
+        }*/
     }
-
-    cancelBooking() {
-        this.http.delete(this.apiBaseUrl + 'booking/delete/'+this.booking.id).subscribe((response) => {
-            // @ts-ignore
-            if(response.status == "success") {
-                window.location.href = '/tabs/' + this.parent;
-            } else {
-                alert("Réservation non annulée");
-            }
-        });
-    }
-
 }

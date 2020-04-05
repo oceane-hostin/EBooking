@@ -1,0 +1,26 @@
+<ion-header [translucent]="true">
+	<ion-toolbar>
+		<ion-title>
+			Déverouiller
+		</ion-title>
+	</ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+	<ion-header collapse="condense">
+		<ion-toolbar>
+			<ion-title size="large">Déverouiller</ion-title>
+		</ion-toolbar>
+	</ion-header>
+	<ion-progress-bar *ngIf="!booking" type="indeterminate"></ion-progress-bar>
+	<ion-item-group *ngIf="booking">
+		<ion-text *ngIf="booking == none; else unlock">Pas de réservation en cours !</ion-text>
+		<ng-template #unlock>
+			<ion-item-group *ngFor="let book of booking">
+
+				<ion-text>Reservation {{book.id}}</ion-text>
+			</ion-item-group>
+		</ng-template>
+	</ion-item-group>
+
+</ion-content>

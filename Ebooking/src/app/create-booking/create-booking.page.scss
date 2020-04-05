@@ -60,19 +60,10 @@ ion-content {
 			}
 		}
 
-		a {
-			text-align: center;
+		ion-button {
 			display: block;
+			margin: 10px auto;
+			max-width: 200px;
 		}
-	}
-
-	ion-button {
-		display: block;
-		margin: 10px auto;
-		max-width: 200px;
-	}
-
-	ion-text p {
-		text-align: center;
 	}
 }

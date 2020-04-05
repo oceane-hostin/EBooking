@@ -4,19 +4,17 @@
             <ion-back-button defaultHref="/tabs/{{ parent }}"></ion-back-button>
         </ion-buttons>
     </ion-toolbar>
-    <ion-progress-bar *ngIf="!housing" type="indeterminate"></ion-progress-bar>
+    <ion-progress-bar *ngIf="" type="indeterminate"></ion-progress-bar>
 </ion-header>
 
 
-<ion-content [fullscreen]="true" *ngIf="housing">
-    <ion-item-group *ngIf="housing.id; else housing_notfound">
+<ion-content [fullscreen]="true" *ngIf="booking && housing">
+   <!-- <ion-item-group *ngIf="booking.id && housing.id; else booking_notfound">
         <ion-item-group class="visual-content">
-            <ion-img *ngIf="housing.images[0];else placeholder" src="../../assets/housing/{{housing.images[0].url}}" alt="{{ housing.name }}"></ion-img>
-            <ng-template #placeholder><ion-img src="../../assets/housing/placeholder.jpg" alt="{{ housing.name }}"></ion-img></ng-template>
-            <ion-text class="price">{{ housing.price_per_day }} € / nuit</ion-text>
-            <ion-text class="date">Mis en ligne le {{ housing.created_at | date: 'dd/MM/yyyy' }} par {{ housing.person.first_name }} {{ housing.person.last_name }}</ion-text>
+            <ion-img src="../../assets/housing/{{housing.images[0].url}}" alt="{{ housing.name }}"></ion-img>
+            <ion-text class="price">{{ booking.beginning_date | date : "d MMM" }} - {{ booking.ending_date | date : "d MMM" }}</ion-text>
+            <ion-text class="date">Votre hôte : {{ housing.person.first_name }} {{ housing.person.last_name }}</ion-text>
         </ion-item-group>
-        <a *ngIf="owner == true && parent == account"  href="/tabs/account/housing/update/?id={{ housing.id }}">Modifier</a>
         <ion-item-group class="text-content">
             <h1>{{ housing.name }}</h1>
             <p>{{ housing.city}}, {{ housing.country }}</p>
@@ -48,11 +46,9 @@
             </ion-list>
             <p>{{ housing.description }}</p>
         </ion-item-group>
+        <ion-button *ngIf="booking && userId && booking.person.id == userId" (click)="cancelBooking()">Annuler ma réservation</ion-button>
     </ion-item-group>
-    <ng-template #housing_notfound>
+    <ng-template #booking_notfound>
         <p>Pas de résultat.</p>
-    </ng-template>
-    <ion-button *ngIf="owner == true && parent == account" (click)="deleteHousing()">Supprimer l'annonce</ion-button>
-    <ion-text  *ngIf="owner == true && parent == account" class="ion-margin-bottom" color="danger"><p>Attention cette action est irréversible !</p></ion-text>
-    <ion-button href="/tabs/discover/housing/booking?id={{ housing.id}}" *ngIf="owner == false">Réserver</ion-button>
+    </ng-template>-->
 </ion-content>

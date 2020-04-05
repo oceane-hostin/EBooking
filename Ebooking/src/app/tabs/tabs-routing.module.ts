@@ -73,12 +73,12 @@ const routes: Routes = [
         ]
       },
       {
-        path: 'search',
+        path: 'unlock',
         children: [
           {
             path: '',
             loadChildren: () =>
-              import('../search/search.module').then(m => m.SearchPageModule)
+              import('../unlock/unlock.module').then(m => m.UnlockPageModule)
           }
         ]
       },
@@ -92,8 +92,18 @@ const routes: Routes = [
           },
           {
             path: 'housing',
-            loadChildren: () =>
-                import('../housing/housing.module').then(m => m.HousingPageModule)
+            children: [
+              {
+                path: '',
+                loadChildren: () =>
+                    import('../housing/housing.module').then(m => m.HousingPageModule)
+              },
+              {
+                path: 'booking',
+                loadChildren: () =>
+                    import('../create-booking/create-booking.module').then(m => m.CreateBookingPageModule)
+              }
+            ]
           }
         ]
       },

@@ -14,7 +14,7 @@ export class HousingPage {
     public apiBaseUrl;
     public housing;
     public parent;
-    public canDelete;
+    public owner;
 
     constructor(private http: HttpClient, private storage: Storage) {
         this.apiBaseUrl = AppModule.getApiUrl();
@@ -22,23 +22,21 @@ export class HousingPage {
         var idHousing = currentUrl.split('?id=')[1]; // get housing id from url
         this.parent = currentUrl.split("/tabs/")[1].split("/housing")[0]; // get the parent tabs for back button
 
-        if (this.parent == "account") {
-            storage.get('session').then((val) => {
-                if (val == null) {
-                    window.location.href = "/tabs/account/login";
-                } else {
-                    this.userId = val;
-                    this.http.get(this.apiBaseUrl + 'person/read/id/' + this.userId).subscribe((response) => {
-                        if (response == null) {
-                            this.storage.remove('session');
-                            window.location.href = "/tabs/account/login";
-                        }
-                        // @ts-ignore
-                        this.userId = response.id;
-                    });
-                }
-            });
-        }
+        storage.get('session').then((val) => {
+            if (val == null) {
+                window.location.href = "/tabs/account/login";
+            } else {
+                this.userId = val;
+                this.http.get(this.apiBaseUrl + 'person/read/id/' + this.userId).subscribe((response) => {
+                    if (response == null) {
+                        this.storage.remove('session');
+                        window.location.href = "/tabs/account/login";
+                    }
+                    // @ts-ignore
+                    this.userId = response.id;
+                });
+            }
+        });
 
         if(idHousing) {
             this.http.get(this.apiBaseUrl + 'housing/read/id/' + idHousing).subscribe((response) => {
@@ -50,9 +48,7 @@ export class HousingPage {
                     housing.updated_at = AppModule.reformatDate(housing.updated_at);
                     this.housing = housing;
 
-                    if (this.housing.person.id == this.userId) {
-                        this.canDelete = true;
-                    }
+                    this.owner = (this.housing.person.id == this.userId);
 
                 } else {
                     this.housing = "notfound";

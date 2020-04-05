@@ -71,6 +71,6 @@
 			<ion-text>Vous n'avez pas encore d'annonces</ion-text>
 		</ion-item-group>
 	</ion-item-group>
-	<ion-button (click)="deleteAccount()">Supprimer mon compte</ion-button>
-	<ion-text class="ion-margin-bottom" color="danger"><p>Attention cette action est irréversible !</p></ion-text>
+	<ion-button *ngIf="person" (click)="deleteAccount()">Supprimer mon compte</ion-button>
+	<ion-text *ngIf="person" class="ion-margin-bottom" color="danger"><p>Attention cette action est irréversible !</p></ion-text>
 </ion-content>
