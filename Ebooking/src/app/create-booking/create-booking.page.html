@@ -4,51 +4,31 @@
             <ion-back-button defaultHref="/tabs/{{ parent }}"></ion-back-button>
         </ion-buttons>
     </ion-toolbar>
-    <ion-progress-bar *ngIf="" type="indeterminate"></ion-progress-bar>
+    <ion-progress-bar *ngIf="!housing || form" type="indeterminate"></ion-progress-bar>
 </ion-header>
 
 
-<ion-content [fullscreen]="true" *ngIf="booking && housing">
-   <!-- <ion-item-group *ngIf="booking.id && housing.id; else booking_notfound">
-        <ion-item-group class="visual-content">
-            <ion-img src="../../assets/housing/{{housing.images[0].url}}" alt="{{ housing.name }}"></ion-img>
-            <ion-text class="price">{{ booking.beginning_date | date : "d MMM" }} - {{ booking.ending_date | date : "d MMM" }}</ion-text>
-            <ion-text class="date">Votre hôte : {{ housing.person.first_name }} {{ housing.person.last_name }}</ion-text>
-        </ion-item-group>
-        <ion-item-group class="text-content">
-            <h1>{{ housing.name }}</h1>
-            <p>{{ housing.city}}, {{ housing.country }}</p>
-            <ion-list>
-                <ion-item>
-                    <ion-avatar>
-                        <ion-icon name="people-outline"></ion-icon>
-                    </ion-avatar>
-                    <ion-label>
-                        {{ housing.number_of_travellers }} voyageurs
-                    </ion-label>
-                </ion-item>
-                <ion-item>
-                    <ion-avatar>
-                        <ion-icon name="bed-outline"></ion-icon>
-                    </ion-avatar>
-                    <ion-label>
-                        {{ housing.number_of_bed }} lits · {{ housing.number_of_bedrooms }} chambres
-                    </ion-label>
-                </ion-item>
-                <ion-item>
-                    <ion-avatar>
-                        <ion-icon name="water-outline"></ion-icon>
-                    </ion-avatar>
-                    <ion-label>
-                        {{ housing.number_of_bathrooms }} salles de bain
-                    </ion-label>
-                </ion-item>
-            </ion-list>
-            <p>{{ housing.description }}</p>
-        </ion-item-group>
-        <ion-button *ngIf="booking && userId && booking.person.id == userId" (click)="cancelBooking()">Annuler ma réservation</ion-button>
-    </ion-item-group>
-    <ng-template #booking_notfound>
-        <p>Pas de résultat.</p>
-    </ng-template>-->
+<ion-content [fullscreen]="true" *ngIf="housing && bookings">
+    <ion-list *ngIf="bookings != notfound">
+        <ion-text color="primary"><h2>Non disponible à ces dates :</h2></ion-text>
+        <ion-item *ngFor="let book of bookings">
+            <ion-label>du {{book.beginning_date | date:"dd/MM/yyyy"}} au {{book.ending_date | date:"dd/MM/yyyy"}}</ion-label>
+        </ion-item>
+        <ion-item><ion-text color="danger">Si vous choississez des dates non disponibles la page sera rechargée</ion-text></ion-item>
+    </ion-list>
+
+    <ion-text color="primary"><h2>Je choisis mes dates de réservation :</h2></ion-text>
+    <form method="post" (submit)="bookHousing()" class="ion-margin">
+        <ion-item>
+            <ion-label>Arrivée</ion-label>
+            <ion-datetime displayformat="MM DD YY" placeholder="Select Date" [(ngModel)]="begin" name="begin" required="required" min="{{min}}" max="{{max}}"></ion-datetime>
+        </ion-item>
+
+        <ion-item>
+            <ion-label>Départ</ion-label>
+            <ion-datetime displayformat="MM DD YY" placeholder="Select Date" [(ngModel)]="end" name="end" required="required" min="{{min}}" max="{{max}}"></ion-datetime>
+        </ion-item>
+
+        <ion-button class="ion-margin-top" expand="block" shape="round" type="submit" >Réserver</ion-button>
+    </form>
 </ion-content>

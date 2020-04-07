@@ -29,7 +29,7 @@ export class CreateAccountPage {
                 this.storage.set("session", response.info);
                 window.location.href = "/tabs/account/";
             } else {
-                window.location.reload()
+                window.location.reload();
             }
         });
 

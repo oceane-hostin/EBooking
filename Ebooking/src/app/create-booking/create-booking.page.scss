@@ -3,67 +3,7 @@ ion-content ion-toolbar {
 }
 
 ion-content {
-	>ion-item-group {
-		>ion-item-group {
-			&.text-content {
-				padding: 0 20px;
-			}
-
-			&.visual-content {
-				position: relative;
-				margin-bottom: 40px;
-			}
-
-			ion-text{
-				display: block;
-
-				&.price {
-					display: inline-block;
-					background-color: var(--ion-color-primary) ;
-					padding: 10px;
-					border-right: 5px;
-					color: white;
-					font-size: 1.2rem;
-					position: absolute;
-					top: 90%;
-					left: 20px;
-				}
-
-				&.date {
-					color: var(--ion-color-dark);
-					font-style: italic;
-					font-size: 0.7rem;
-					position: absolute;
-					top: 100%;
-					right: 20px;
-				}
-			}
-
-			ion-list {
-				margin-left: -20px;
-
-				ion-item {
-					ion-avatar {
-						margin-right: 10px;
-
-						ion-icon {
-							width: 100%;
-							height: 100%;
-							color: var(--ion-color-secondary);
-						}
-					}
-
-					.item-native {
-						padding-left: 0;
-					}
-				}
-			}
-		}
-
-		ion-button {
-			display: block;
-			margin: 10px auto;
-			max-width: 200px;
-		}
+	h2 {
+		padding: 0 20px;
 	}
 }
