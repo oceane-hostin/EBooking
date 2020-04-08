@@ -17,7 +17,7 @@
 			</ion-buttons>
 		</ion-toolbar>
 	</ion-header>
-	<ion-progress-bar *ngIf="!person" type="indeterminate"></ion-progress-bar>
+	<ion-progress-bar *ngIf="!person || !rentings" type="indeterminate"></ion-progress-bar>
 	<ion-item-group *ngIf="person" class="profile-header">
 		<ion-img src="../../assets/others/accountpattern.png"></ion-img>
 		<ion-item-group>
@@ -27,12 +27,35 @@
             <a class="ion-margin-top" href="/tabs/account/update">Modifier</a>
 		</ion-item-group>
 	</ion-item-group>
+	<ion-item-group *ngIf="rentings" class="ion-padding">
+		<ion-text color="secondary"><h2>Les locations de mes biens</h2></ion-text>
+		<ion-text *ngIf="validationCount > 0" color="danger">Vous avez {{validationCount}} location(s) à valider !</ion-text>
+		<a href="/tabs/account/booking?id={{ renting.id}}" class="housing-card" *ngFor="let renting of rentings">
+			<ion-card>
+				<ion-img *ngIf="renting.housing.images[0];else placeholder" src="../../assets/housing/{{renting.housing.images[0].url}}" alt="{{ renting.housing.name }}"></ion-img>
+				<ng-template #placeholder><ion-img src="../../assets/housing/placeholder.jpg" alt="{{ renting.housing.name }}"></ion-img></ng-template>
+				<ion-text *ngIf="renting.is_confirmed == 1;else other_status" class="status">Confirmée</ion-text>
+				<ng-template #other_status><ion-text class="status not-confirmed">À Confirmer</ion-text></ng-template>
+				<ion-text class="price">{{ renting.beginning_date | date : "d MMM" }} - {{ renting.ending_date | date : "d MMM" }}</ion-text>
+				<ion-card-header>
+					<ion-card-subtitle>{{ renting.housing.city }}</ion-card-subtitle>
+					<ion-card-title>{{ renting.housing.name }}</ion-card-title>
+				</ion-card-header>
+
+				<ion-card-content>
+					{{ renting.housing.description }}
+				</ion-card-content>
+			</ion-card>
+		</a>
+	</ion-item-group>
 	<ion-item-group *ngIf="bookings" class="ion-padding">
 		<ion-text color="secondary"><h2>Mes réservations</h2></ion-text>
 		<a href="/tabs/account/booking?id={{ book.id }}" class="housing-card" *ngFor="let book of bookings">
 			<ion-card>
 				<ion-img *ngIf="book.housing.images[0];else placeholder" src="../../assets/housing/{{book.housing.images[0].url}}" alt="{{ book.housing.name }}"></ion-img>
 				<ng-template #placeholder><ion-img src="../../assets/housing/placeholder.jpg" alt="{{ book.housing.name }}"></ion-img></ng-template>
+				<ion-text *ngIf="book.is_confirmed == 1;else other_status" class="status">Confirmée</ion-text>
+				<ng-template #other_status><ion-text class="status not-confirmed">En attente</ion-text></ng-template>
 				<ion-text class="price">{{ book.beginning_date | date : "d MMM" }} - {{ book.ending_date | date : "d MMM" }}</ion-text>
 				<ion-card-header>
 					<ion-card-subtitle>{{ book.housing.city }}</ion-card-subtitle>

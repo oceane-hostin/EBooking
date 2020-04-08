@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {Storage} from '@ionic/storage';
 import {HttpClient} from "@angular/common/http";
 import {AppModule} from "../app.module";
+import {count} from "rxjs/operators";
 
 @Component({
     selector: 'app-account',
@@ -12,8 +13,10 @@ export class AccountPage {
     public apiBaseUrl;
     private id;
     public person;
-    private housings;
-    private bookings;
+    public housings;
+    public bookings;
+    public rentings;
+    public validationCount;
 
 
     constructor(private storage: Storage, private http: HttpClient) {
@@ -44,6 +47,20 @@ export class AccountPage {
                     this.bookings = bookings;
 
                 });
+                this.http.get(this.apiBaseUrl + 'booking/read/owner_id/' + this.id).subscribe((response) => {
+                    var rentings = response;
+                    var validationCount = 0;
+                    // @ts-ignore
+                    rentings.forEach(function (renting) {
+                        renting.beginning_date = AppModule.reformatDate(renting.beginning_date);
+                        renting.ending_date = AppModule.reformatDate(renting.ending_date);
+                        if (renting.is_confirmed == 0) {
+                            validationCount++;
+                        }
+                    });
+                    this.rentings = rentings;
+                    this.validationCount = validationCount;
+                });
             }
         });
     }
@@ -64,5 +81,4 @@ export class AccountPage {
             }
         });
     }
-
 }
