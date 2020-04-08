@@ -68,8 +68,7 @@ export class UpdateHousingPage {
                     this.storage.set("session", response.info);
                     window.location.href = "/tabs/account/";
                 } else {
-                    console.log(response);
-                    //window.location.reload();
+                    window.location.reload();
                 }
             });
         }

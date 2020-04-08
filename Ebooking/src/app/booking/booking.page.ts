@@ -15,6 +15,7 @@ export class BookingPage {
     public housing;
     public parent;
     public apiBaseUrl;
+    public userType;
 
     constructor(private http: HttpClient, private storage: Storage) {
         this.apiBaseUrl = AppModule.getApiUrl();
@@ -44,8 +45,14 @@ export class BookingPage {
                     var booking = response;
 
                     // @ts-ignore
-                    if(booking.person.id != this.userId) {
+                    if(booking.person.id != this.userId && booking.housing.person.id != this.userId) {
                         window.location.href = "/tabs/account";
+                    // @ts-ignore
+                    } else if (booking.housing.person.id == this.userId) {
+                        this.userType = "owner";
+                    // @ts-ignore
+                    } else if (booking.person.id  == this.userId) {
+                        this.userType = "customer";
                     }
 
                     // @ts-ignore
@@ -76,6 +83,19 @@ export class BookingPage {
                 window.location.href = '/tabs/' + this.parent;
             } else {
                 alert("Réservation non annulée");
+            }
+        });
+    }
+
+    confirmBooking() {
+        this.http.get(this.apiBaseUrl + 'booking/confirm/' + this.booking.id).subscribe((response) => {
+            // response having status and info values
+            // @ts-ignore
+            if (response.status == "success") {
+                // @ts-ignore
+                window.location.href = "/tabs/account/";
+            } else {
+                window.location.reload();
             }
         });
     }

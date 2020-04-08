@@ -46,7 +46,8 @@
             </ion-list>
             <p>{{ housing.description }}</p>
         </ion-item-group>
-        <ion-button *ngIf="booking && userId && booking.person.id == userId" (click)="cancelBooking()">Annuler ma réservation</ion-button>
+        <ion-button *ngIf="booking && userType && userType == 'customer'" (click)="cancelBooking()">Annuler ma réservation</ion-button>
+        <ion-button *ngIf="booking && booking.is_confirmed != 1 && userType && userType == 'owner'" (click)="confirmBooking()">Confirmer la location</ion-button>
     </ion-item-group>
     <ng-template #booking_notfound>
         <p>Pas de résultat.</p>

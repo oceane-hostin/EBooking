@@ -8,8 +8,8 @@ ion-content {
 		background-color: var(--ion-color-light);
 		padding: 20px 0;
 
-		.swiper-pagination-bullet {
-			background-color: var(--ion-color-dark);
+		ion-slides {
+			--bullet-background: black;
 		}
 	}
 

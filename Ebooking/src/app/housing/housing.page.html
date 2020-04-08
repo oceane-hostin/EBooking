@@ -52,7 +52,7 @@
     <ng-template #housing_notfound>
         <p>Pas de résultat.</p>
     </ng-template>
-    <ion-button *ngIf="owner == true && parent == account" (click)="deleteHousing()">Supprimer l'annonce</ion-button>
-    <ion-text  *ngIf="owner == true && parent == account" class="ion-margin-bottom" color="danger"><p>Attention cette action est irréversible !</p></ion-text>
+    <ion-button *ngIf="owner == true && parent == 'account'" (click)="deleteHousing()">Supprimer l'annonce</ion-button>
+    <ion-text  *ngIf="owner == true && parent == 'account'" class="ion-margin-bottom" color="danger"><p>Attention cette action est irréversible !</p></ion-text>
     <ion-button href="/tabs/discover/housing/booking?id={{ housing.id}}" *ngIf="owner == false">Réserver</ion-button>
 </ion-content>
