@@ -2,11 +2,19 @@ ion-content ion-toolbar {
 	--background: translucent;
 }
 ion-content {
-	display: flex;
-	flex-wrap: wrap;
-
 	a {
 		text-decoration: none;
+	}
+
+	ion-item-group {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+
+		> * {
+			max-width: 500px;
+			margin: 10px;
+		}
 	}
 
 	ion-card {

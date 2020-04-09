@@ -5,6 +5,17 @@ ion-content {
 		--background: translucent;
 	}
 
+	.card-container {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+
+		> * {
+			max-width: 500px;
+			margin: 10px;
+		}
+	}
+
 	.profile-header {
 		text-align: center;
 		position: relative;

@@ -12,7 +12,9 @@ export class LoginPage {
     public form;
 
     constructor(private http: HttpClient, private storage: Storage) {
-
+        storage.get('session').then((val) => {
+           console.log(val);
+        });
     }
 
     login() {

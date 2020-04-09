@@ -14,19 +14,21 @@
     </ion-header>
 
     <ion-progress-bar *ngIf="!housings" type="indeterminate"></ion-progress-bar>
-    <a href="/tabs/discover/housing?id={{ housing.id}}" *ngFor="let housing of housings">
-        <ion-card>
-            <ion-img *ngIf="housing.images[0];else placeholder" src="../../assets/housing/{{housing.images[0].url}}" alt="{{ housing.name }}"></ion-img>
-            <ng-template #placeholder><ion-img src="../../assets/housing/placeholder.jpg" alt="{{ housing.name }}"></ion-img></ng-template>
-            <ion-text class="price">{{ housing.price_per_day }} € / nuit</ion-text>
-            <ion-card-header>
-                <ion-card-subtitle>{{ housing.city }}</ion-card-subtitle>
-                <ion-card-title>{{ housing.name }}</ion-card-title>
-            </ion-card-header>
+    <ion-item-group>
+        <a href="/tabs/discover/housing?id={{ housing.id}}" *ngFor="let housing of housings">
+            <ion-card>
+                <ion-img *ngIf="housing.images[0];else placeholder" src="../../assets/housing/{{housing.images[0].url}}" alt="{{ housing.name }}"></ion-img>
+                <ng-template #placeholder><ion-img src="../../assets/housing/placeholder.jpg" alt="{{ housing.name }}"></ion-img></ng-template>
+                <ion-text class="price">{{ housing.price_per_day }} € / nuit</ion-text>
+                <ion-card-header>
+                    <ion-card-subtitle>{{ housing.city }}</ion-card-subtitle>
+                    <ion-card-title>{{ housing.name }}</ion-card-title>
+                </ion-card-header>
 
-            <ion-card-content>
-                {{ housing.description }}
-            </ion-card-content>
-        </ion-card>
-    </a>
+                <ion-card-content>
+                    {{ housing.description }}
+                </ion-card-content>
+            </ion-card>
+        </a>
+    </ion-item-group>
 </ion-content>

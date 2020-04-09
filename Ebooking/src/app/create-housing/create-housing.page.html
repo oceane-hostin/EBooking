@@ -6,7 +6,7 @@
     </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" *ngIf="userId">
     <ion-header collapse="condense">
         <ion-toolbar>
             <ion-title size="large">Ajouter une annonce</ion-title>

@@ -23,15 +23,11 @@ export class AccountPage {
         this.apiBaseUrl = AppModule.getApiUrl();
 
         storage.get('session').then((val) => {
-            if (val == null) {
+            if (!val) {
                 window.location.href = "/tabs/account/login";
             } else {
                 this.id = val;
                 this.http.get(this.apiBaseUrl + 'person/read/id/' + this.id).subscribe((response) => {
-                    if(response == null) {
-                        this.storage.remove('session');
-                        window.location.href = "/tabs/account/login";
-                    }
                     var person = response;
                     // @ts-ignore
                     person.date_of_birth = AppModule.reformatDate(person.date_of_birth);
@@ -75,7 +71,11 @@ export class AccountPage {
             // @ts-ignore
             if(response.status == "success") {
                 this.storage.remove('session');
-                window.location.href = '/';
+                setTimeout(() =>
+                {
+                    window.location.href = '/';
+                },
+                5000);
             } else {
                 alert("Compte non supprimer");
             }

@@ -30,43 +30,47 @@
 	<ion-item-group *ngIf="rentings" class="ion-padding">
 		<ion-text color="secondary"><h2>Les locations de mes biens</h2></ion-text>
 		<ion-text *ngIf="validationCount > 0" color="danger">Vous avez {{validationCount}} location(s) à valider !</ion-text>
-		<a href="/tabs/account/booking?id={{ renting.id}}" class="housing-card" *ngFor="let renting of rentings">
-			<ion-card>
-				<ion-img *ngIf="renting.housing.images[0];else placeholder" src="../../assets/housing/{{renting.housing.images[0].url}}" alt="{{ renting.housing.name }}"></ion-img>
-				<ng-template #placeholder><ion-img src="../../assets/housing/placeholder.jpg" alt="{{ renting.housing.name }}"></ion-img></ng-template>
-				<ion-text *ngIf="renting.is_confirmed == 1;else other_status" class="status">Confirmée</ion-text>
-				<ng-template #other_status><ion-text class="status not-confirmed">À Confirmer</ion-text></ng-template>
-				<ion-text class="price">{{ renting.beginning_date | date : "d MMM" }} - {{ renting.ending_date | date : "d MMM" }}</ion-text>
-				<ion-card-header>
-					<ion-card-subtitle>{{ renting.housing.city }}</ion-card-subtitle>
-					<ion-card-title>{{ renting.housing.name }}</ion-card-title>
-				</ion-card-header>
+        <ion-item-group class="card-container">
+            <a href="/tabs/account/booking?id={{ renting.id}}" class="housing-card" *ngFor="let renting of rentings">
+                <ion-card>
+                    <ion-img *ngIf="renting.housing.images[0];else placeholder" src="../../assets/housing/{{renting.housing.images[0].url}}" alt="{{ renting.housing.name }}"></ion-img>
+                    <ng-template #placeholder><ion-img src="../../assets/housing/placeholder.jpg" alt="{{ renting.housing.name }}"></ion-img></ng-template>
+                    <ion-text *ngIf="renting.is_confirmed == 1;else other_status" class="status">Confirmée</ion-text>
+                    <ng-template #other_status><ion-text class="status not-confirmed">À Confirmer</ion-text></ng-template>
+                    <ion-text class="price">{{ renting.beginning_date | date : "d MMM" }} - {{ renting.ending_date | date : "d MMM" }}</ion-text>
+                    <ion-card-header>
+                        <ion-card-subtitle>{{ renting.housing.city }}</ion-card-subtitle>
+                        <ion-card-title>{{ renting.housing.name }}</ion-card-title>
+                    </ion-card-header>
 
-				<ion-card-content>
-					{{ renting.housing.description }}
-				</ion-card-content>
-			</ion-card>
-		</a>
+                    <ion-card-content>
+                        {{ renting.housing.description }}
+                    </ion-card-content>
+                </ion-card>
+            </a>
+        </ion-item-group>
 	</ion-item-group>
 	<ion-item-group *ngIf="bookings" class="ion-padding">
 		<ion-text color="secondary"><h2>Mes réservations</h2></ion-text>
-		<a href="/tabs/account/booking?id={{ book.id }}" class="housing-card" *ngFor="let book of bookings">
-			<ion-card>
-				<ion-img *ngIf="book.housing.images[0];else placeholder" src="../../assets/housing/{{book.housing.images[0].url}}" alt="{{ book.housing.name }}"></ion-img>
-				<ng-template #placeholder><ion-img src="../../assets/housing/placeholder.jpg" alt="{{ book.housing.name }}"></ion-img></ng-template>
-				<ion-text *ngIf="book.is_confirmed == 1;else other_status" class="status">Confirmée</ion-text>
-				<ng-template #other_status><ion-text class="status not-confirmed">En attente</ion-text></ng-template>
-				<ion-text class="price">{{ book.beginning_date | date : "d MMM" }} - {{ book.ending_date | date : "d MMM" }}</ion-text>
-				<ion-card-header>
-					<ion-card-subtitle>{{ book.housing.city }}</ion-card-subtitle>
-					<ion-card-title>{{ book.housing.name }}</ion-card-title>
-				</ion-card-header>
+        <ion-item-group class="card-container">
+            <a href="/tabs/account/booking?id={{ book.id }}" class="housing-card" *ngFor="let book of bookings">
+                <ion-card>
+                    <ion-img *ngIf="book.housing.images[0];else placeholder" src="../../assets/housing/{{book.housing.images[0].url}}" alt="{{ book.housing.name }}"></ion-img>
+                    <ng-template #placeholder><ion-img src="../../assets/housing/placeholder.jpg" alt="{{ book.housing.name }}"></ion-img></ng-template>
+                    <ion-text *ngIf="book.is_confirmed == 1;else other_status" class="status">Confirmée</ion-text>
+                    <ng-template #other_status><ion-text class="status not-confirmed">En attente</ion-text></ng-template>
+                    <ion-text class="price">{{ book.beginning_date | date : "d MMM" }} - {{ book.ending_date | date : "d MMM" }}</ion-text>
+                    <ion-card-header>
+                        <ion-card-subtitle>{{ book.housing.city }}</ion-card-subtitle>
+                        <ion-card-title>{{ book.housing.name }}</ion-card-title>
+                    </ion-card-header>
 
-				<ion-card-content>
-					{{ book.housing.description }}
-				</ion-card-content>
-			</ion-card>
-		</a>
+                    <ion-card-content>
+                        {{ book.housing.description }}
+                    </ion-card-content>
+                </ion-card>
+            </a>
+        </ion-item-group>
 		<ion-item-group class="empty-list" *ngIf="bookings.length == 0">
 			<img src="../../assets/icon/housing.png" alt="house icon"/>
 			<ion-text>Vous n'avez pas encore de réservations</ion-text>
@@ -74,21 +78,23 @@
 	</ion-item-group>
 	<ion-item-group *ngIf="housings" class="ion-padding">
 		<ion-text color="secondary"><h2>Mes annonces</h2></ion-text>
-		<a href="/tabs/account/housing?id={{ housing.id}}" class="housing-card" *ngFor="let housing of housings">
-			<ion-card>
-				<ion-img *ngIf="housing.images[0];else placeholder" src="../../assets/housing/{{housing.images[0].url}}" alt="{{ housing.name }}"></ion-img>
-				<ng-template #placeholder><ion-img src="../../assets/housing/placeholder.jpg" alt="{{ housing.name }}"></ion-img></ng-template>
-				<ion-text class="price">{{ housing.price_per_day }} € / nuit</ion-text>
-				<ion-card-header>
-					<ion-card-subtitle>{{ housing.city }}</ion-card-subtitle>
-					<ion-card-title>{{ housing.name }}</ion-card-title>
-				</ion-card-header>
+        <ion-item-group class="card-container">
+            <a href="/tabs/account/housing?id={{ housing.id}}" class="housing-card" *ngFor="let housing of housings">
+                <ion-card>
+                    <ion-img *ngIf="housing.images[0];else placeholder" src="../../assets/housing/{{housing.images[0].url}}" alt="{{ housing.name }}"></ion-img>
+                    <ng-template #placeholder><ion-img src="../../assets/housing/placeholder.jpg" alt="{{ housing.name }}"></ion-img></ng-template>
+                    <ion-text class="price">{{ housing.price_per_day }} € / nuit</ion-text>
+                    <ion-card-header>
+                        <ion-card-subtitle>{{ housing.city }}</ion-card-subtitle>
+                        <ion-card-title>{{ housing.name }}</ion-card-title>
+                    </ion-card-header>
 
-				<ion-card-content>
-					{{ housing.description }}
-				</ion-card-content>
-			</ion-card>
-		</a>
+                    <ion-card-content>
+                        {{ housing.description }}
+                    </ion-card-content>
+                </ion-card>
+            </a>
+        </ion-item-group>
 		<ion-item-group class="empty-list" *ngIf="housings.length == 0">
 			<img src="../../assets/icon/housing.png" alt="house icon"/>
 			<ion-text>Vous n'avez pas encore d'annonces</ion-text>
