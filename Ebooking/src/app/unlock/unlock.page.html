@@ -12,13 +12,21 @@
 			<ion-title size="large">Déverouiller</ion-title>
 		</ion-toolbar>
 	</ion-header>
-	<ion-progress-bar *ngIf="!booking" type="indeterminate"></ion-progress-bar>
-	<ion-item-group *ngIf="booking">
-		<ion-text *ngIf="booking == none; else unlock">Pas de réservation en cours !</ion-text>
+	<ion-progress-bar *ngIf="!bookings" type="indeterminate"></ion-progress-bar>
+	<ion-item-group *ngIf="bookings">
+		<ion-text *ngIf="bookings == none; else unlock">Pas de réservation en cours !</ion-text>
 		<ng-template #unlock>
-			<ion-item-group *ngFor="let book of booking">
-
-				<ion-text>Reservation {{book.id}}</ion-text>
+			<ion-item-group *ngFor="let booking of bookings" class="ion-padding">
+				<ion-item-group class="visual-content">
+					<ion-img src="../../assets/housing/{{booking.housing.images[0].url}}" alt="{{ booking.housing.name }}"></ion-img>
+					<ion-text class="price">{{ booking.beginning_date | date : "d MMM" }} - {{ booking.ending_date | date : "d MMM" }}</ion-text>
+					<ion-text class="date">Votre hôte : {{ booking.housing.person.first_name }} {{ booking.housing.person.last_name }}</ion-text>
+				</ion-item-group>
+				<ion-item-group class="text-content">
+					<h1>{{ booking.housing.name }}</h1>
+					<p>{{ booking.housing.street}}, {{ booking.housing.zip_code}} {{ booking.housing.city}}, {{ booking.housing.country }}</p>
+				</ion-item-group>
+				<ion-button *ngIf="booking" >Déverouiller la porte</ion-button>
 			</ion-item-group>
 		</ng-template>
 	</ion-item-group>

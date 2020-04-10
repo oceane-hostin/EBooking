@@ -27,7 +27,7 @@
             <a class="ion-margin-top" href="/tabs/account/update">Modifier</a>
 		</ion-item-group>
 	</ion-item-group>
-	<ion-item-group *ngIf="rentings" class="ion-padding">
+	<ion-item-group *ngIf="rentings && rentings.length > 0" class="ion-padding">
 		<ion-text color="secondary"><h2>Les locations de mes biens</h2></ion-text>
 		<ion-text *ngIf="validationCount > 0" color="danger">Vous avez {{validationCount}} location(s) à valider !</ion-text>
         <ion-item-group class="card-container">

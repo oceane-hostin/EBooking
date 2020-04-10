@@ -11,7 +11,7 @@ import {AppModule} from "../app.module";
 export class UnlockPage {
     public userId;
     public apiBaseUrl;
-    public booking;
+    public bookings;
 
     constructor(private storage: Storage, private http: HttpClient) {
         this.apiBaseUrl = AppModule.getApiUrl();
@@ -30,13 +30,17 @@ export class UnlockPage {
                     this.userId = response.id;
 
                     this.http.get(this.apiBaseUrl + 'booking/current/person_id/' + this.userId).subscribe((response) => {
-                        //this.http.get(this.apiBaseUrl + 'booking/read/id/1').subscribe((response) => {
                         if (response != null) {
-                            this.booking = response;
+                            var bookings = response;
+                            // @ts-ignore
+                            bookings.forEach(function (booking) {
+                                booking.beginning_date = AppModule.reformatDate(booking.beginning_date);
+                                booking.ending_date = AppModule.reformatDate(booking.ending_date);
+                            });
+                            this.bookings = bookings;
                         } else {
-                            this.booking = "none";
+                            this.bookings = "none";
                         }
-                        console.log(response);
                     });
                 });
             }
